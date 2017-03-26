@@ -10,6 +10,9 @@ module.exports = require('lib/wiring/routes')
 // standards RESTful routes
 .resources('examples')
 
+//review routes
+.resources('reviews')
+
 //rentals routes
 .resources('rentals')
 
