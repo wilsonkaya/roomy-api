@@ -17,6 +17,15 @@ const index = (req, res, next) => {
     .catch(next);
 };
 
+const indexMyRentals = (req, res, next) => {
+  Rental.find({ _owner: req.user })
+    .then(rentals => res.json({
+      rentals: rentals.map((e) =>
+        e.toJSON({ virtuals: true, user: req.user })),
+    }))
+    .catch(next);
+};
+
 const show = (req, res) => {
   res.json({
     rental: req.rental.toJSON({ virtuals: true, user: req.user }),
@@ -51,12 +60,13 @@ const destroy = (req, res, next) => {
 
 module.exports = controller({
   index,
+  indexMyRentals,
   show,
   create,
   update,
   destroy,
 }, { before: [
-  { method: setUser, only: ['index', 'show'] },
+  { method: setUser, only: ['index', 'show', 'indexMyRentals'] },
   { method: authenticate, except: ['index', 'show'] },
   { method: setModel(Rental), only: ['show'] },
   { method: setModel(Rental, { forUser: true }), only: ['update', 'destroy'] },
