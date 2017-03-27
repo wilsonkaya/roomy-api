@@ -11,6 +11,11 @@ const reviewSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  rentals: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Rental',
+    required: true
+  },
   _owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
