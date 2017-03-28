@@ -9,7 +9,6 @@ const setUser = require('./concerns/set-current-user');
 const setModel = require('./concerns/set-mongoose-model');
 
 const index = (req, res, next) => {
-  console.log(req.query)
   Review.find({ rentals: req.query.rentals })
     .then(reviews => res.json({
       reviews: reviews.map((e) =>
