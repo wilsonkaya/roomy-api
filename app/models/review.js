@@ -6,10 +6,14 @@ const reviewSchema = new mongoose.Schema({
   comment: {
     type: String,
     required: true,
+    minlength: 1,
+    maxlength: 50
   },
   rating: {
     type: Number,
     required: true,
+    minlength: 1,
+    maxlength: 50
   },
   rentals: {
     type: mongoose.Schema.Types.ObjectId,
