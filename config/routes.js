@@ -19,6 +19,9 @@ module.exports = require('lib/wiring/routes')
 //index for personal rentals
 .get('/myrentals', 'rentals#indexMyRentals')
 
+//index for reviews
+.get('/myreviews', 'reviews#indexMyReviews')
+
 // users of the app have special requirements
 .post('/sign-up', 'users#signup')
 .post('/sign-in', 'users#signin')

@@ -9,7 +9,16 @@ const setUser = require('./concerns/set-current-user');
 const setModel = require('./concerns/set-mongoose-model');
 
 const index = (req, res, next) => {
-  Review.find({ rentals: req.query.rentals })
+  Review.find({ reviews: req.query.reviews })
+    .then(reviews => res.json({
+      reviews: reviews.map((e) =>
+        e.toJSON({ virtuals: true, user: req.user })),
+    }))
+    .catch(next);
+};
+
+const indexMyReviews = (req, res, next) => {
+  Review.find({ _owner: req.user })
     .then(reviews => res.json({
       reviews: reviews.map((e) =>
         e.toJSON({ virtuals: true, user: req.user })),
@@ -51,12 +60,13 @@ const destroy = (req, res, next) => {
 
 module.exports = controller({
   index,
+  indexMyReviews,
   show,
   create,
   update,
   destroy,
 }, { before: [
-  { method: setUser, only: ['index', 'show'] },
+  { method: setUser, only: ['index', 'show', 'indexMyReviews'] },
   { method: authenticate, except: ['index', 'show'] },
   { method: setModel(Review), only: ['show'] },
   { method: setModel(Review, { forUser: true }), only: ['update', 'destroy'] },
