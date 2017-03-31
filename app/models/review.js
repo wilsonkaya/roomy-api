@@ -12,8 +12,8 @@ const reviewSchema = new mongoose.Schema({
   rating: {
     type: Number,
     required: true,
-    minlength: 1,
-    maxlength: 50
+    min: 1,
+    max: 5
   },
   rentals: {
     type: mongoose.Schema.Types.ObjectId,
