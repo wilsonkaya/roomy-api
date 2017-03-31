@@ -41,6 +41,9 @@ After receving the third error of not having controller, I created the specific 
 
 I began coding routes by starting with create, so that I could have data to test other routes. After getting the basic functioning api, I build my front-end so that I could test both of them at the same time. According to necessities of my app, I modified both my models and controllers.
 
+## Installation instructions ##
+Dependencies are installed with Npm install.
+
 
 ## Major hurdles ##
 At the beginning of this project I did not realize that I will need a parent child relationship and I thought I would make only one table. However, I ended up coding my second table, reviews. As a child of rentals, reviews should be deleted when users delete the related rental. So I needed to find a way to make the non-sql database have relations.
